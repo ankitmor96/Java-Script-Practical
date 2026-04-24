@@ -1,4 +1,5 @@
-<img width="1887" height="834" alt="Screenshot 2026-04-23 163218" src="https://github.com/user-attachments/assets/0c6c378f-d47f-4cbb-a98e-6383a799ed66" />
+<img width="1894" height="803" alt="Screenshot 2026-04-24 155639" src="https://github.com/user-attachments/assets/ea3e9f30-79e8-4355-be05-757b183616d4" />
+
 
 # 🛒 Shopping Cart Web App
 
