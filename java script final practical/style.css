@@ -3,11 +3,19 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color:rgba(10, 8, 5, 0.848);
+}
 
 .p-card{
     height: 550px;
+    color: white;
+    background-color:black;
 }
 .p-card img{
-    height: 300px;
+    height: 300px; 
+}
+.modal-content{
+       background-color: rgba(143, 230, 57, 0.778);
 }
 
