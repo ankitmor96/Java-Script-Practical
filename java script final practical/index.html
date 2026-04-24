@@ -14,7 +14,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary mt-3 rounded-2">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">PRODUCTS</a>
+                <a class="navbar-brand" href="#">PRO<span class="text-primary">DUCTS</span> </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +29,10 @@
                             <button class="btn btn-outline-success btn-full ms-2" onclick="displayModal()">Product List</button>
                         </li>
                         <button class="btn btn-outline-success btn-full ms-2" onclick="displayModal1()"> Add Product</button>
+                       
+                        <input type="text"  class="ms-2 text-center rounded-2" id="searchInput" placeholder="Search product">
+                        <button onclick="searchProduct()" class="ms-2 text-center rounded-2 btn btn-outline-success">👆</button>
+
                     </ul>
                    
                 </div>
@@ -55,9 +59,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Product Image</th>
-                                    <th>Product Name</th>
-                                    <th>Quentity</th>
+                                    <th>P. Image</th>
+                                    <th>P. Name</th>
+                                    <th>Qty</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                 </tr>
@@ -72,7 +76,7 @@
                             <div class="fw-bold" id="grand-total"></div>
                         </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="checkOut()">check out</button>
+                        <button type="button" class="btn btn-primary" onclick="checkOut()">Added</button>
                     </div>
                 </div>
             </div>
@@ -121,7 +125,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="UpdateproductForm">
+                        <form id="EditProductForm">
                             <div class="mb-2">
                                 <label for="EditProductName">p.Name :</label>
                                 <input type="text" id="EditProductName" placeholder="product name" class="mb-2">
@@ -138,7 +142,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Update Product</button>
+                                <button type="submit" class="btn btn-primary">Edit Product</button>
                             </div>
                         </form>
                     </div>
