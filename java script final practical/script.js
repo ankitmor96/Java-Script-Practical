@@ -1,4 +1,4 @@
-const products = [
+let products = [
     {
         id: 1,
         name: "VR Headset",
@@ -74,7 +74,7 @@ const products = [
 
 ];
 
-function displayProduct(){
+function displayProduct(data = products) {
 
 
     const prductList = document.getElementById("product-list");
@@ -82,7 +82,7 @@ function displayProduct(){
 
     prductList.innerHTML = "";
 
-    products.forEach((p) => {
+    data.forEach((p) => {
 
         prductList.innerHTML += `
     <div class="col-md-4 mt-4">
@@ -90,12 +90,12 @@ function displayProduct(){
   <img src="${p.image}" class="card-img-top" alt="${p.name}">
   <div class="card-body text-center">
     <h5 class="card-title">${p.name}</h5>
-    <p>⭐⭐⭐⭐⭐</p>
+    <p>🛒</p>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
     <h2 class = " card-price card-text">₹${p.price}</h2>
     <a href="#" class="btn btn-outline-primary" onclick="addProductList(${p.id})">➕Add To Cart</a>
-    <a href="#" class="btn btn-outline-success" >✏️Update</a>
-    <a href="#" class="btn btn-outline-danger" >🗑️Delete</a>
+    <a href="#" class="btn btn-outline-success" onclick="EditProductModal(${p.id})" >✏️Update</a>
+    <a href="#" class="btn btn-outline-danger" onclick="DeleteProduct(${p.id})">🗑️Delete</a>
   </div>
 </div>
     </div>`
@@ -147,7 +147,7 @@ function displayModal() {
 
 }
 
-function showCartData() {
+function showProductData() {
     try {
 
         const cartList = document.getElementById("cartTable");
@@ -168,17 +168,17 @@ function showCartData() {
 
          <div class="d-flex gap-2">
          
-         <button class="btn btn-success " onClick = "increaseQty(${p.id})">+</button>
+         <button class="btn btn-success " onClick = "IncreaseQty(${p.id})">+</button>
 
          <h5>${p.qty}</h5>
 
-         <button class="btn btn-danger" onclick = "decreaseqty(${p.id})">-</button>
+         <button class="btn btn-danger" onclick = "Decreaseqty(${p.id})">-</button>
 
          </div>
 
          </td>
          <td>₹${p.qty * p.price}</td>
-         <td><button class ="btn btn-danger" onclick = "remove(${p.id})">remove</button></td>         
+         <td><button class ="btn btn-danger" onclick = "Remove(${p.id})">remove</button></td>         
          </tr>`;
 
         });
@@ -189,7 +189,7 @@ function showCartData() {
     }
 }
 
-function increaseQty(id) {
+function IncreaseQty(id) {
 
 
     const product = cartItems.find((p) => p.id === id);
@@ -210,13 +210,13 @@ function editLatestData() {
 
     localStorage.setItem("cartData", JSON.stringify(cartItems));
 
-    showCartData();
-   
+    showProductData();
+
     total();
 
 }
 
-function decreaseqty(id) {
+function Decreaseqty(id) {
 
     const product = cartItems.find((p) => p.id === id);
 
@@ -232,11 +232,11 @@ function decreaseqty(id) {
 
     }
 
-   editLatestData();
+    editLatestData();
 
 }
 
-function remove(id) {
+function Remove(id) {
 
     cartItems = cartItems.filter((p) => p.id !== id);
 
@@ -332,7 +332,87 @@ function addProduct() {
     editLatestData();
 }
 
-    
+
+function DeleteProduct(id) {
+
+    products = products.filter((p) => p.id !== id);
+    alert("Are You Sure Product Have Deletted");
+
+
+    displayProduct();
+
+}
+
+function EditProductModal(id) {
+
+    let ModalElement = document.getElementById("EditProductModal");
+
+    let modal = new bootstrap.Modal(ModalElement)
+
+    modal.show();
+
+    const product = products.find((p) => p.id === id)
+
+    if (!product) {
+        return alert("product not found");
+    }
+
+    let index = products.findIndex((p) => p.id === id);
+
+    if (index === -1) {
+        return alert("product not found");
+    }
+
+    document.getElementById("EditProductName").value = products[index].name
+    document.getElementById("EditProductPrice").value = products[index].price
+    document.getElementById("EditProductImage").value = products[index].image
+
+    let form = document.getElementById("EditProductForm");
+
+    form.onsubmit = function (e) {
+        e.preventDefault();
+
+        let name = document.getElementById("EditProductName").value;
+        let price = document.getElementById("EditProductPrice").value;
+        let image = document.getElementById("EditProductImage").value;
+
+        products[index] = {
+            ...products[index],
+            name,
+            price: Number(price),
+            image,
+        };
+
+        modal.hide();
+
+        displayProduct();
+
+    };
+}
+
+function searchProduct() {
+    let value = document.getElementById("searchInput").value.toLowerCase();
+
+    let result = products.filter((p) =>
+        p.name.toLowerCase().includes(value)
+    );
+
+    if (result.length === 0) {
+        document.getElementById("product-list").innerHTML = "<h3>No Product Found</h3>";
+    } else {
+        displayProduct(result);
+    }
+}
+
+function Short(){
+
+
+
+}
+
+
+
+
 
 
 
